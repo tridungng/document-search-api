@@ -1,5 +1,31 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "document-search-api"
+name = "document-search"
 version = "0.1.0"
-requires-python = ">=3.14"
-dependencies = []
+description = "FastAPI document search service using Elasticsearch"
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn[standard]>=0.35,<1",
+    "elasticsearch[async]==9.5.0",
+    "pydantic-settings>=2.10,<3",
+    "python-multipart>=0.0.20,<1",
+    "pypdf==6.16.2",
+    "anyio>=4.9,<5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4,<9",
+    "pytest-asyncio>=1.1,<2",
+    "httpx>=0.28,<1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"
